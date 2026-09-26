@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+/*
+ * Dark instrument-panel theme. Every component references these tokens
+ * (bg-surface, text-fg, border-border, ...) so the whole UI kit inherits
+ * the look — never hardcode a hex value in a component.
+ */
+@theme {
+  /* Color tokens — dark instrument panel, calm, high contrast */
+  --color-bg: #0b1220;
+  --color-surface: #111a2c;
+  --color-surface-2: #182338;
+  --color-border: #23324d;
+  --color-fg: #e6edf7;
+  --color-muted: #8ba0bd;
+  --color-accent: #14b8a6;
+  --color-accent-hover: #0d9488;
+  --color-accent-fg: #04211d;
+  --color-success: #34d399;
+  --color-warning: #fbbf24;
+  --color-danger: #f87171;
+
+  /* Font families (wired to next/font CSS variables in src/app/layout.tsx) */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-accent-fg);
+  }
+
+  code,
+  pre,
+  kbd {
+    font-family: var(--font-mono);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/*
+ * Logic lab: signal propagation dot that travels along the output wire
+ * while a gate is "computing". The reduced-motion block above collapses
+ * the animation; hide the dot entirely so it never sits frozen mid-wire.
+ */
+@keyframes signal-dot-travel {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  to {
+    transform: translateX(56px);
+    opacity: 0.4;
+  }
+}
+
+.signal-dot {
+  animation: signal-dot-travel 260ms linear forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signal-dot {
+    display: none;
+  }
+}
