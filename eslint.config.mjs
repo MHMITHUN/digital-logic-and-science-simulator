@@ -3,7 +3,8 @@ import nextTypescript from "eslint-config-next/typescript";
 
 /**
  * Flat config. eslint-config-next 16 ships native flat-config arrays,
- * so no FlatCompat translation is needed (ESLint 10 compatible).
+ * so no FlatCompat translation is needed; eslint is intentionally
+ * pinned to ^9.39.0 — see README (do not upgrade to 10).
  */
 const eslintConfig = [
   {
